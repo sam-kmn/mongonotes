@@ -14,9 +14,9 @@ const Note = () => {
   const [loading, setLoading] = useState(true)
 
   const editNote = async (data: NoteType) => {
-    
+    if (!process.env.NEXT_PUBLIC_URL) return
     try {
-      const res = await (await fetch('http://localhost:3000/api/notes/' + data._id, {
+      const res = await (await fetch(process.env.NEXT_PUBLIC_URL + data._id, {
         method: "PUT",
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(data) 
@@ -33,9 +33,9 @@ const Note = () => {
   }
 
   const deleteNote = async () => {
-
+    if (!process.env.NEXT_PUBLIC_URL) return
     try {
-      const res = await (await fetch('http://localhost:3000/api/notes/' + id, {
+      const res = await (await fetch(process.env.NEXT_PUBLIC_URL + id, {
         method: "DELETE",
         headers: {'Content-Type': 'application/json'},
       })).json()
@@ -51,8 +51,9 @@ const Note = () => {
 
   useEffect(() => {
     const fetchData = async () => {
+      if (!process.env.NEXT_PUBLIC_URL) return
       setLoading(true)
-      const response = await (await fetch('http://localhost:3000/api/notes/' + id)).json()
+      const response = await (await fetch(process.env.NEXT_PUBLIC_URL + id)).json()
       if (!response.success) return router.push('/error')
       setData(response.data)
       setLoading(false) 

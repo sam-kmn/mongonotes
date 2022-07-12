@@ -8,8 +8,9 @@ const Add = () => {
 
   const submit = async (data: NoteType) => {
     
+    if (!process.env.NEXT_PUBLIC_URL) return
     try {
-      const res = await (await fetch('http://localhost:3000/api/notes/', {
+      const res = await (await fetch(process.env.NEXT_PUBLIC_URL, {
         method: "POST",
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(data) 

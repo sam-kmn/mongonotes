@@ -5,8 +5,9 @@ export const getServerSideProps = async () => {
 
   const notes = []
 
+  if (!process.env.NEXT_PUBLIC_URL) return
   try {
-    const response = await (await fetch('http://localhost:3000/api/notes/')).json()
+    const response = await (await fetch(process.env.NEXT_PUBLIC_URL)).json()
     if (response.success) notes.push(...response.data)    
   } catch (error) {
     console.log(error);
