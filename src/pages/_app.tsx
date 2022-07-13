@@ -10,7 +10,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       <link rel="icon" href="/favicon.ico" />
     </Head>
 
-    <div className='bg-sky-100 w-screen h-screen flex flex-col'>
+    <div className='flex flex-col bg-sky-100 w-screen h-screen overflow-scroll'>
       <Navbar />
       <Component {...pageProps} />
     </div>
